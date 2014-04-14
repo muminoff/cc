@@ -162,7 +162,8 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.app %>/styles',
                     src: '{,*/}*.less',
-                    dest: '.tmp/styles',
+                    // dest: '.tmp/styles',
+                    dest: '<%= config.dist %>/styles',
                     ext: '.css'
                 }]
             },
@@ -176,7 +177,7 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.app %>/styles',
                     src: '{,*/}*.less',
-                    dest: '.tmp/styles',
+                    dest: '<%= config.dist %>/styles',
                     ext: '.css'
                 }]
             }
@@ -356,8 +357,8 @@ module.exports = function (grunt) {
                 'copy:styles'
             ],
             dist: [
-                // 'less:dist',
-                // 'copy:styles',
+                'less:dist',
+                'copy:styles',
                 // 'imagemin',
                 // 'svgmin'
             ]
