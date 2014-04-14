@@ -1,0 +1,44 @@
+
+// bower:less
+@import 'bootstrap/less/bootstrap';
+// endbower
+
+body {
+    background-image:url(/images/background.png)
+}
+
+// Brand colors
+// -------------------------
+
+@brand-primary:         #2773ae;
+@brand-success:         #5cb85c;
+@brand-warning:         #f0ad4e;
+@brand-danger:          #d9534f;
+@brand-info:            #5bc0de;
+
+/* Custom styles */
+@btn-primary-color:              #fff;
+@btn-primary-bg:                 @brand-primary;
+@btn-primary-border:             darken(@btn-primary-bg, 5%);
+
+
+.purchase-form {
+    padding: 20px 20px 20px;
+    margin-top: 150px;
+    border: 8px solid #bbb;
+    background: #fff;
+}
+
+.header {
+    /* font-family: 'Arimo', sans-serif; */
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.nod_msg {
+    padding: 2px;
+    color: #fff;
+    background: @brand-danger;
+}
