@@ -35,7 +35,7 @@ module.exports = function (grunt) {
             },
             js: {
                 files: ['<%= config.app %>/scripts/{,*/}*.js'],
-                tasks: ['jshint'],
+                // tasks: ['jshint'],
                 options: {
                     livereload: true
                 }
@@ -162,8 +162,8 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.app %>/styles',
                     src: '{,*/}*.less',
-                    // dest: '.tmp/styles',
-                    dest: '<%= config.dist %>/styles',
+                    dest: '.tmp/styles',
+                    // dest: '<%= config.dist %>/styles',
                     ext: '.css'
                 }]
             },
@@ -177,7 +177,8 @@ module.exports = function (grunt) {
                     expand: true,
                     cwd: '<%= config.app %>/styles',
                     src: '{,*/}*.less',
-                    dest: '<%= config.dist %>/styles',
+                    // dest: '<%= config.dist %>/styles',
+                    dest: '.tmp/styles',
                     ext: '.css'
                 }]
             }
