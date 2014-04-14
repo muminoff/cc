@@ -356,10 +356,10 @@ module.exports = function (grunt) {
                 'copy:styles'
             ],
             dist: [
-                'less:dist',
-                'copy:styles',
-                'imagemin',
-                'svgmin'
+                // 'less:dist',
+                // 'copy:styles',
+                // 'imagemin',
+                // 'svgmin'
             ]
         }
     });
