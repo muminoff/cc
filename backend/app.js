@@ -1,13 +1,18 @@
 var express = require('express'),
-  mongoose = require('mongoose'),
   fs = require('fs'),
+  mysql = require('mysql'),
   config = require('./config/config');
 
-mongoose.connect(config.db);
-var db = mongoose.connection;
-db.on('error', function () {
-  throw new Error('unable to connect to database at ' + config.db);
-});
+  var dbconnection = mysql.createConnection({
+    host: "127.0.0.1",
+    user: "root",
+    password: "qwe123qwe",
+    database: "test"
+  });
+
+  dbconnection.on("error", function(error){
+    console.log("ERROR" + error);
+  });
 
 var modelsPath = __dirname + '/app/models';
 fs.readdirSync(modelsPath).forEach(function (file) {
