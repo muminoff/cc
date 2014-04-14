@@ -1,4 +1,4 @@
-cc
-==
+Cyan Cub
+--------
 
-Cyan Cub — one time paid paypal sale
+Cyan Cub — one time purchase via paypal
