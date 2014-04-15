@@ -10,8 +10,14 @@ function countryListDeselect() {
 
 function validateHandler() {
   var metrics = [
-    ['input', 'presence', 'Required'],
+    ['#manager', 'presence', 'Required'],
+    ['#company', 'presence', 'Required'],
+    ['#email', 'presence', 'Required'],
     ['#country', 'presence', 'Required'],
+    ['#phone', 'presence', 'Required'],
+    ['#users', 'presence', 'Required'],
+    ['#amount', 'presence', 'Required'],
+    ['#domain', 'presence', 'Required'],
     ['#users', 'min-num:1', 'Minimum 1 user'],
     ['#users', 'max-num:999', 'Maximum 999 users'],
     ['#users', 'integer', 'Numbers only'],
@@ -19,12 +25,12 @@ function validateHandler() {
     ['#amount', 'min-num:1', 'Min. payment 1$'],
   ];
   var options = {
-    // 'delay': 2000,
+    'delay': 2000,
     'helpSpanDisplay': 'help-block',
     'groupSelector': '.input-group',
     'groupClass': 'warning'
   }
-  $("#purchase").nod(metrics, options);
+  $("#purchase").nod(metrics, options).on('submit');
 }
 
 function focusToNameInput() {
