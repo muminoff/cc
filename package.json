@@ -1,7 +1,11 @@
 {
   "name": "cc",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.0.0",
+    "mysql": "^2.1.1",
+    "nodemailer": "^0.6.2"
+  },
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-copy": "~0.5.0",
