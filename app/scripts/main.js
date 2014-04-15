@@ -54,7 +54,7 @@ function getURLParameter(sParam)
 }
 
 function getAvailablePlans() {
-  $.getJSON('http://localhost:3456/plans', function(data) {
+  $.getJSON('https://paypal.mofficesuite.com:3456/plans', function(data) {
     $.each(data.available_plans, function(key, val) {
       var plan = getURLParameter('plan'),
           selected = "";
