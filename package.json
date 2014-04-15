@@ -2,10 +2,9 @@
   "name": "cc",
   "version": "0.0.0",
   "dependencies": {
-    "express": "^4.0.0",
+    "express": "~3.3.4",
     "mysql": "^2.1.1",
-    "nodemailer": "^0.6.2",
-    "body-parser": "^1.0.2"
+    "nodemailer": "^0.6.2"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
