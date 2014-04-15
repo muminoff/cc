@@ -1,15 +1,17 @@
 $(document).ready(function() {
-  countryListDeselect();
   validateHandler();
   focusToNameInput();
+  getAvailablePlans();
+  listDeselect();
 });
 
-function countryListDeselect() {
+function listDeselect() {
   $('#country').prop('selectedIndex', -1);
 }
 
 function validateHandler() {
   var metrics = [
+    ['#plan', 'presence', 'Required'],
     ['#manager', 'presence', 'Required'],
     ['#company', 'presence', 'Required'],
     ['#email', 'presence', 'Required'],
@@ -35,4 +37,29 @@ function validateHandler() {
 
 function focusToNameInput() {
   $('#manager').focus();
+}
+
+function getURLParameter(sParam) 
+{
+  var sPageURL = window.location.search.substring(1);
+  var sURLVariables = sPageURL.split('&');
+  for (var i = 0; i < sURLVariables.length; i++)
+  {
+    var sParameterName = sURLVariables[i].split('=');
+    if (sParameterName[0] == sParam)
+    {
+      return sParameterName[1];
+    }
+  }
+}
+
+function getAvailablePlans() {
+  $.getJSON('http://localhost:3456/plans', function(data) {
+    $.each(data.available_plans, function(key, val) {
+      var plan = getURLParameter('plan'),
+          selected = "";
+      if(val.name===plan)selected="selected";
+      $('#plan').append('<option name="' + val.name + '" ' + selected + '>' + val.desc + '</option>');
+    });
+  });
 }
