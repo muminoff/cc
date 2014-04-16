@@ -14,9 +14,9 @@ exports.insert = function(req, res){
   , domain = req.body.domain;
   if(plan && name && company && email && country && phone && users && amount && domain) {
 
-  var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`plan`, `name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `domain`) VALUES (";
+  var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`plan`, `name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `domain`, `paid`) VALUES (";
   insertQuery += '"' + plan + '", "' + name + '", "' + company + '", "' + email + '", ';
-  insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '");';
+  insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '", 0);';
   connection.query(insertQuery, function(err, rows) {
 	  if(err)throw err;
       res.json({result: true});
