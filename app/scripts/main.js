@@ -59,7 +59,7 @@ function getAvailablePlans() {
       var plan = getURLParameter('plan'),
           selected = "";
       if(val.name===plan)selected="selected";
-      $('#plan').append('<option name="' + val.name + '" ' + selected + '>' + val.desc + '</option>');
+      $('#plan').append('<option value="' + val.name + '" ' + selected + '>' + val.desc + '</option>');
     });
   });
 }
