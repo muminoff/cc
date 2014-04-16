@@ -34,7 +34,8 @@ app.get('/plans', plans.list);
 app.post('/services', services.insert);
 app.post('/purchase', function(req, res) {
   res.header('Access-Control-Allow-Origin', '*');
-  var name = req.body.name
+  var plan = req.body.plan
+  , name = req.body.name
   , company = req.body.company
   , email = req.body.email
   , country = req.body.country
