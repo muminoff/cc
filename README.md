@@ -1,4 +1,5 @@
-Cyan Cub
---------
+MofficeSuite Paypal
+-------------------
 
-Cyan Cub — one time purchase via paypal
+MofficeSuite online sale
+
