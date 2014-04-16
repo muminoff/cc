@@ -35,6 +35,7 @@ app.get('/plans', plans.list);
 app.post('/purchase', services.insert);
 app.get('/success', paypal.success);
 app.get('/cancel', paypal.cancel);
+app.get('/pay', paypal.pay);
 
 
 http.createServer(app).listen(app.get('port'), function(){
