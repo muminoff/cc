@@ -3,6 +3,7 @@ $(document).ready(function() {
   focusToNameInput();
   getAvailablePlans();
   listDeselect();
+  formSubmitHandler();
 });
 
 function listDeselect() {
@@ -62,4 +63,24 @@ function getAvailablePlans() {
       $('#plan').append('<option value="' + val.name + '" ' + selected + '>' + val.desc + '</option>');
     });
   });
+}
+
+function formSubmitHandler() {
+  $('#purchase').bind('submit', function(e) {
+    var formData = $(this).serialize();
+    console.log(formData);
+    e.preventDefault();
+    $.ajax({
+      url: "http://121.254.175.67:3456/purchase",
+      type: "POST",
+      dataType: "json",
+      data: formData,
+      success: function(resp){
+        console.log(resp);
+      },
+      error: function(err){
+        console.log(err);
+      }
+  });
+});
 }
