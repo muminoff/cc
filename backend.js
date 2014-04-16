@@ -1,11 +1,17 @@
 
 /**
- * Module dependencies.
+ * Hanbiro MofficeSuite Paypal Backend
+ * -----------------------------------
+ *
+ *  Developer: sardor@hanbiro.com
+ *  Maintainer: linuxmaster@hanbiro.com
+ *
  */
 
 var express = require('express')
   , plans = require('./routes/plans')
   , services = require('./routes/services')
+  , paypal = require('./routes/paypal')
   , http = require('http')
   , path = require('path')
   , mysql = require('mysql');
@@ -16,6 +22,7 @@ app.configure(function(){
   app.set('port', process.env.PORT || 3456);
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
+  app.use(express.cookieParser('aaaaaaaaaaaaaaa'));
   app.use(express.methodOverride());
   app.use(app.router);
 });
@@ -26,6 +33,9 @@ app.configure('development', function(){
 
 app.get('/plans', plans.list);
 app.post('/purchase', services.insert);
+app.get('/success', paypal.success);
+app.get('/cancel', paypal.cancel);
+app.get('/pay', paypal.pay);
 
 
 http.createServer(app).listen(app.get('port'), function(){
