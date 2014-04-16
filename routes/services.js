@@ -4,7 +4,7 @@ exports.insert = function(req, res){
   res.header('Access-Control-Allow-Origin', '*');
   var connection = conn.index
   , plan = req.body.plan
-  , name = req.body.name
+  , name = req.body.manager
   , company = req.body.company
   , email = req.body.email
   , country = req.body.country
