@@ -9,20 +9,34 @@
  */
 
 var express = require('express')
+  // , services = require('./routes/services')
   , plans = require('./routes/plans')
-  , services = require('./routes/services')
   , paypal = require('./routes/paypal')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , fs = require('fs');
 
 var app = express();
 
+// configuration
+try {
+  var configJSON = fs.readFileSync(__dirname + "/config.json");
+  var config = JSON.parse(configJSON.toString());
+} catch (e) {
+  console.error("File config.json not found or is invalid: " + e.message);
+  process.exit(1);
+}
+
+paypal.init(config);
+
+// all environments 
 app.configure(function(){
-  app.set('port', process.env.PORT || 3456);
+  app.set('port', process.env.PORT || config.port);
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
-  app.use(express.cookieParser('Your random generated key here.'));
   app.use(express.methodOverride());
+  app.use(express.cookieParser('Your random generated key here.'));
+  app.use(express.session());
   app.use(app.router);
 });
 
@@ -37,5 +51,5 @@ app.get('/cancel', paypal.cancel);
 
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Paypal middleware listening on port " + app.get('port'));
+  console.log("Paypal backend listening on port " + app.get('port'));
 });
