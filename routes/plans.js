@@ -1,8 +1,8 @@
-var conn = require('../config')
+var db = require('../db')
   , availablePlans = 'SELECT * FROM available_plans';
 
 exports.list = function(req, res){
-  var connection = conn.index;
+  var connection = db.index;
   connection.query(availablePlans, function(err, rows){
     if(err) throw err;
     res.header('Access-Control-Allow-Origin', '*');
