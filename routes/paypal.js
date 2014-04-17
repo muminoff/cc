@@ -26,25 +26,40 @@ var create_payment_json = {
     }]
 };
 
-exports.success = function(req, res){
+// Create Payment URL
+exports.create = function(req, res){
+  res.header('Access-Control-Allow-Origin', '*');
+  var connection = conn.index
+  , plan = req.body.plan
+  , name = req.body.manager
+  , company = req.body.company
+  , email = req.body.email
+  , country = req.body.country
+  , phone = req.body.phone
+  , users = req.body.users
+  , amount = req.body.amount
+  , domain = req.body.domain;
+  if(plan && name && company && email && country && phone && users && amount && domain) {
+
+  var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`plan`, `name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `domain`, `paid`) VALUES (";
+  insertQuery += '"' + plan + '", "' + name + '", "' + company + '", "' + email + '", ';
+  insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '", 0);';
+  connection.query(insertQuery, function(err, rows) {
+	  if(err)throw err;
+      res.json({result: true});
+    });
+  } else {
+      res.json({result: false});
+  }
+};
+
+// Execute URL
+exports.execute = function(req, res){
   res.send('This is success page');
 };
 
+// Cancel URL
 exports.cancel = function(req, res){
   res.send('This is cancel page');
-};
-
-exports.pay = function(req, res){
-  // res.header('Access-Control-Allow-Origin', '*');
-  paypal_api.payment.create(create_payment_json, config_opts, function (err, res) {
-    if (err) {
-      throw err;
-    }
-
-    if (res) {
-      console.log("Create Payment Response");
-      res.json(res);
-    }
-  });
 };
 
