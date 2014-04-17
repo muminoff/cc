@@ -13,8 +13,7 @@ var express = require('express')
   , services = require('./routes/services')
   , paypal = require('./routes/paypal')
   , http = require('http')
-  , path = require('path')
-  , mysql = require('mysql');
+  , path = require('path');
 
 var app = express();
 
@@ -22,7 +21,7 @@ app.configure(function(){
   app.set('port', process.env.PORT || 3456);
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
-  app.use(express.cookieParser('aaaaaaaaaaaaaaa'));
+  app.use(express.cookieParser('Your random generated key here.'));
   app.use(express.methodOverride());
   app.use(app.router);
 });
@@ -32,12 +31,11 @@ app.configure('development', function(){
 });
 
 app.get('/plans', plans.list);
-app.post('/purchase', services.insert);
-app.get('/success', paypal.success);
+app.post('/create', paypal.create);
+app.get('/execute', paypal.execute);
 app.get('/cancel', paypal.cancel);
-app.get('/pay', paypal.pay);
 
 
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+  console.log("Paypal middleware listening on port " + app.get('port'));
 });
