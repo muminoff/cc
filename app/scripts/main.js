@@ -3,7 +3,7 @@ $(document).ready(function() {
   focusToNameInput();
   getAvailablePlans();
   listDeselect();
-  formSubmitHandler();
+  // formSubmitHandler();
 });
 
 function listDeselect() {
@@ -12,15 +12,15 @@ function listDeselect() {
 
 function validateHandler() {
   var metrics = [
-    ['#plan', 'presence', 'Required'],
-    ['#manager', 'presence', 'Required'],
-    ['#company', 'presence', 'Required'],
-    ['#email', 'presence', 'Required'],
-    ['#country', 'presence', 'Required'],
-    ['#phone', 'presence', 'Required'],
-    ['#users', 'presence', 'Required'],
-    ['#amount', 'presence', 'Required'],
-    ['#domain', 'presence', 'Required'],
+    ['#plan', 'presence', 'Required field'],
+    ['#manager', 'presence', 'Required field'],
+    ['#company', 'presence', 'Required field'],
+    ['#email', 'presence', 'Required field'],
+    ['#country', 'presence', 'Required field'],
+    ['#phone', 'presence', 'Required field'],
+    ['#users', 'presence', 'Required field'],
+    ['#amount', 'presence', 'Required field'],
+    ['#domain', 'presence', 'Required field'],
     ['#users', 'min-num:1', 'Minimum 1 user'],
     ['#users', 'max-num:999', 'Maximum 999 users'],
     ['#users', 'integer', 'Numbers only'],
@@ -60,7 +60,7 @@ function getAvailablePlans() {
       var plan = getURLParameter('plan'),
           selected = "";
       if(val.name===plan)selected="selected";
-      $('#plan').append('<option value="' + val.name + '" ' + selected + '>' + val.desc + '</option>');
+      $('#plan').append('<option value="' + val.desc + '" ' + selected + '>' + val.desc + '</option>');
     });
   });
 }
@@ -71,12 +71,22 @@ function formSubmitHandler() {
     console.log(formData);
     e.preventDefault();
     $.ajax({
-      url: "http://121.254.175.67:3456/purchase",
+      url: "http://paypal.mofficesuite.com:3456/create",
       type: "POST",
       dataType: "json",
       data: formData,
       success: function(resp){
-        console.log(resp);
+        if(resp.result) {
+          var redirectUrl;
+          for(var i=0; i<resp.payment.links.length; i++) {
+            var link = resp.payment.links[i];
+            if(link.method === 'REDIRECT') {
+              redirectUrl = link.href;
+            }
+          }
+          window.location.href= redirectUrl;
+        } else {
+        }
       },
       error: function(err){
         console.log(err);
