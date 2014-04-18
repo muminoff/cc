@@ -3,7 +3,7 @@
 	"api" : {
 		"host" : "api.paypal.com",
 		"port" : "",
-		"client_id" : "AcyUPxC1vbVtNb-A9YjKUjaPfFav25nQ1p-VpTp-NWIDHNfaueE3ebH2NJ2k",
-		"client_secret" : "EMdKiRDCSHBqdjW_p1rIXHAeWxPZpIVfQGFWeMjSmulOM5HNlCcT4nh5EN9u"
+		"client_id" : 		"----------------REAL_CLIENT_ID---------------",
+		"client_secret" : 	"--------------REAL_CLIENT_SECRET-------------"
 	}
 }
