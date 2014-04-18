@@ -28,8 +28,6 @@ CREATE TABLE `purchased_services` (
   `users` int(11) NOT NULL,
   `amount` int(11) NOT NULL,
   `domain` varchar(255) NOT NULL,
-  `paid` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
-INSERT INTO `purchased_services` VALUES (44,'lite','124qwr','qwet','sarsadgdor@hanbiro.com','koasdgasdgrea12345','23587235',102,53,'sardorasfasf',0);

@@ -1,0 +1,9 @@
+{
+	"port" : 3456,
+	"api" : {
+		"host" : "api.paypal.com",
+		"port" : "",
+		"client_id" : 		"----------------REAL_CLIENT_ID---------------",
+		"client_secret" : 	"--------------REAL_CLIENT_SECRET-------------"
+	}
+}
