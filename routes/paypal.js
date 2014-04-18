@@ -49,7 +49,7 @@ exports.create = function (req, res) {
 
         var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`plan`, `name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `domain`, `paypal_payment_id`) VALUES (";
           insertQuery += '"' + plan + '", "' + name + '", "' + company + '", "' + email + '", ';
-    insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '.mofficesuite.com", "' + req.session.paymentId + '");';
+    insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '.mofficesuite.com", "' + payment.id + '");';
     connection.query(insertQuery, function(err, rows) {
       if(err)throw err;
       req.session.paymentId = payment.id;
