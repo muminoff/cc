@@ -47,9 +47,9 @@ exports.create = function (req, res) {
         res.json({ 'error': error, result: false });
       } else {
 
-        var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`plan`, `name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `domain`) VALUES (";
+        var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`plan`, `name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `domain`, `paypal_payment_id`) VALUES (";
           insertQuery += '"' + plan + '", "' + name + '", "' + company + '", "' + email + '", ';
-    insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '.mofficesuite.com");';
+    insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '.mofficesuite.com", "' + req.session.paymentId + '");';
     connection.query(insertQuery, function(err, rows) {
       if(err)throw err;
       req.session.paymentId = payment.id;
@@ -79,7 +79,7 @@ exports.execute = function (req, res) {
       outHtml += "<head>";
       outHtml += "<meta charset=\"utf-8\">";
       outHtml += "<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css\" />";
-      outHtml += "<title>Payment done</title>";
+      outHtml += "<title>Payment failed</title>";
       outHtml += "</head>";
       outHtml += "<body>";
       outHtml += "<h1>Payment failed</h1>";
@@ -122,19 +122,23 @@ exports.execute = function (req, res) {
 };
 
 exports.cancel = function (req, res) {
-  var outHtml = "<!doctype html>";
-  outHtml += "<head>";
-  outHtml += "<meta charset=\"utf-8\">";
-  outHtml += "<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css\" />";
-  outHtml += "<title>Payment done</title>";
-  outHtml += "</head>";
-  outHtml += "<body>";
-  outHtml += "<h1>Payment cancelled</h1>";
-  outHtml += "<p>You cancelled your payment.</p>";
-  outHtml += "<a class=\"btn btn-warning btn-lg\" href=\"https://paypal.mofficesuite.com/\">Try again</a>"
-  outHtml += "</body>";
-  outHtml += "</html>";
-  res.send(outHtml);
+  var deleteQuery = 'DELETE FROM `paypal`.`purchased_services` WHERE `paypal_payment_id`="' + req.session.paymentId + '";';
+    connection.query(deleteQuery, function(err, rows) {
+      if(err)throw err;
+      var outHtml = "<!doctype html>";
+      outHtml += "<head>";
+      outHtml += "<meta charset=\"utf-8\">";
+      outHtml += "<link rel=\"stylesheet\" href=\"//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.min.css\" />";
+      outHtml += "<title>Payment done</title>";
+      outHtml += "</head>";
+      outHtml += "<body>";
+      outHtml += "<h1>Payment cancelled</h1>";
+      outHtml += "<p>You cancelled your payment.</p>";
+      outHtml += "<a class=\"btn btn-warning btn-lg\" href=\"https://paypal.mofficesuite.com/\">Try again</a>"
+      outHtml += "</body>";
+      outHtml += "</html>";
+      res.send(outHtml);
+    }); 
 };
 
 // Configuration
