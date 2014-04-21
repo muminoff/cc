@@ -48,7 +48,7 @@ exports.create = function (req, res) {
         res.json({ 'error': error, result: false });
       } else {
 
-        var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `paypal_payment_id`) VALUES (";
+        var insertQuery = "INSERT INTO `paypal`.`sale` (`name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `paypal_payment_id`) VALUES (";
           insertQuery += '"' + name + '", "' + company + '", "' + email + '", ';
     insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + payment.id + '");';
     connection.query(insertQuery, function(err, rows) {
@@ -123,7 +123,7 @@ exports.execute = function (req, res) {
 };
 
 exports.cancel = function (req, res) {
-  var deleteQuery = 'DELETE FROM `paypal`.`purchased_services` WHERE `paypal_payment_id`="' + req.session.paymentId + '";';
+  var deleteQuery = 'DELETE FROM `paypal`.`sale` WHERE `paypal_payment_id`="' + req.session.paymentId + '";';
     connection.query(deleteQuery, function(err, rows) {
       if(err)throw err;
       var outHtml = "<!doctype html>";
