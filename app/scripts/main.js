@@ -1,7 +1,7 @@
 $(document).ready(function() {
   validateHandler();
   focusToNameInput();
-  getAvailablePlans();
+  // getAvailablePlans();
   listDeselect();
   // formSubmitHandler();
 });
@@ -54,16 +54,16 @@ function getURLParameter(sParam)
   }
 }
 
-function getAvailablePlans() {
-  $.getJSON('http://121.254.175.67:3456/plans', function(data) {
-    $.each(data.available_plans, function(key, val) {
-      var plan = getURLParameter('plan'),
-          selected = "";
-      if(val.name===plan)selected="selected";
-      $('#plan').append('<option value="' + val.desc + '" ' + selected + '>' + val.desc + '</option>');
-    });
-  });
-}
+// function getAvailablePlans() {
+//   $.getJSON('http://121.254.175.67:3456/plans', function(data) {
+//     $.each(data.available_plans, function(key, val) {
+//       var plan = getURLParameter('plan'),
+//           selected = "";
+//       if(val.name===plan)selected="selected";
+//       $('#plan').append('<option value="' + val.desc + '" ' + selected + '>' + val.desc + '</option>');
+//     });
+//   });
+// }
 
 function formSubmitHandler() {
   $('#purchase').bind('submit', function(e) {
