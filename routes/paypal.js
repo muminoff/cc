@@ -11,14 +11,14 @@ exports.create = function (req, res) {
   var method = req.param('method')
   , currency = req.param('currency')
   , amount = req.param('amount')
-  , plan = req.param('plan')
+  // , plan = req.param('plan')
   , name = req.param('manager')
   , company = req.param('company')
   , email = req.param('email')
   , country = req.param('country')
   , phone = req.param('phone')
   , users = req.param('users')
-  , domain = req.param('domain') 
+  // , domain = req.param('domain') 
   , payment = {
     "intent": "sale",
     "payer": {
@@ -28,11 +28,12 @@ exports.create = function (req, res) {
         "currency": currency,
         "total": amount
       },
-      "description": plan
+      // "description": plan
+      "description": "Purchase Mofficesuite"
     }]
   };
 
-  if(method && currency && amount && plan && name && company && email && country && phone && users && domain){
+  if(method && currency && amount && name && company && email && country && phone && users){
 
     payment.payer.payment_method = 'paypal';
     payment.redirect_urls = {
@@ -47,9 +48,9 @@ exports.create = function (req, res) {
         res.json({ 'error': error, result: false });
       } else {
 
-        var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`plan`, `name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `domain`, `paypal_payment_id`) VALUES (";
-          insertQuery += '"' + plan + '", "' + name + '", "' + company + '", "' + email + '", ';
-    insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + domain + '.mofficesuite.com", "' + payment.id + '");';
+        var insertQuery = "INSERT INTO `paypal`.`purchased_services` (`name`, `company`, `email`, `country`, `phone`, `users`, `amount`, `paypal_payment_id`) VALUES (";
+          insertQuery += '"' + name + '", "' + company + '", "' + email + '", ';
+    insertQuery += '"' + country + '", "' + phone + '", "' + users + '", "' + amount + '", "' + payment.id + '");';
     connection.query(insertQuery, function(err, rows) {
       if(err)throw err;
       req.session.paymentId = payment.id;
